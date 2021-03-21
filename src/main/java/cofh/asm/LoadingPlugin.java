@@ -6,6 +6,7 @@ import cofh.repack.codechicken.lib.asm.ASMInit;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import cpw.mods.fml.common.DummyModContainer;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.ModContainerFactory;
@@ -107,7 +108,7 @@ public class LoadingPlugin implements IFMLLoadingPlugin {
 				}
 			});
 			JOptionPane.showMessageDialog(null, ep, "Fatal error", JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
+			FMLCommonHandler.instance().exitJava(1, false);
 		}
 		l: if (obfuscated && System.getProperty("java.specification.version").compareTo("1.8") < 0) {
 			// create always-on-top modal dialogue in a separate thread so initialization can continue (but the user has to respond anyway)
