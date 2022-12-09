@@ -92,20 +92,20 @@ public class CoFHFakePlayer extends FakePlayer {
 		previousItem = itemstack1 == null ? null : itemstack1.copy();
 		theItemInWorldManager.updateBlockRemoving();
 
-		if (itemInUse != null) {
+		if (getItemInUse() != null) {
 			// tickItemInUse(itemstack);
 		}
 	}
 
 	public void tickItemInUse(ItemStack updateItem) {
 
-		if (updateItem != null && ItemHelper.itemsEqualWithMetadata(previousItem, itemInUse)) {
+		if (updateItem != null && ItemHelper.itemsEqualWithMetadata(previousItem, getItemInUse())) {
 
-			itemInUseCount = ForgeEventFactory.onItemUseTick(this, itemInUse, itemInUseCount);
+			itemInUseCount = ForgeEventFactory.onItemUseTick(this, getItemInUse(), itemInUseCount);
 			if (itemInUseCount <= 0) {
 				onItemUseFinish();
 			} else {
-				itemInUse.getItem().onUsingTick(itemInUse, this, itemInUseCount);
+				getItemInUse().getItem().onUsingTick(getItemInUse(), this, itemInUseCount);
 				if (itemInUseCount <= 25 && itemInUseCount % 4 == 0) {
 					updateItemUse(updateItem, 5);
 				}
